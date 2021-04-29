@@ -1,17 +1,13 @@
+import { useMovies } from '../hooks/useMovies'
 import { Button } from '../components/Button';
 
-interface GenreResponseProps {
-  id: number;
-  name: 'action' | 'comedy' | 'documentary' | 'drama' | 'horror' | 'family';
-  title: string;
-}
+export function SideBar() {
+  const {
+    genres,
+    selectedGenreId,
+    handleClickButton
+  } = useMovies();
 
-interface SidebarProps {
-  selectedGenreId: number;
-  genres: GenreResponseProps[]
-  handleClickBtn(id: number): void
-}
-export function SideBar({ selectedGenreId, genres, handleClickBtn }: SidebarProps) {
   return (
     <nav className="sidebar">
       <span>Watch<p>Me</p></span>
@@ -22,7 +18,7 @@ export function SideBar({ selectedGenreId, genres, handleClickBtn }: SidebarProp
             key={String(genre.id)}
             title={genre.title}
             iconName={genre.name}
-            onClick={() => handleClickBtn(genre.id)}
+            onClick={() => handleClickButton(genre.id)}
             selected={selectedGenreId === genre.id}
           />
         ))}
